@@ -56,10 +56,14 @@ const getMovieById = (req, res) => {
       res.status(500).send("Error retrieving data from database")
     });
   const movie = movies.find((movie) => movie.id === id);
+};
 
+const postMovie = (req, res) => {
+  res.send('Post route is working 🎉')
 };
 
 module.exports = {
   getMovies,
   getMovieById,
+  postMovie,
 };
