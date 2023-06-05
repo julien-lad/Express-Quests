@@ -4,9 +4,12 @@ const express = require("express");
 
 const app = express();
 
-const port = process.env.APP_PORT ?? 5000;
+app.use(express.json());
+
+const port = process.env.APP_PORT ?? 6008;
 
 const welcome = (req, res) => {
+  console.log("page d'accueil")
   res.send("Welcome to my favourite movie list");
 };
 
@@ -31,3 +34,4 @@ app.listen(port, (err) => {
 });
 
 app.post('/api/movies', movieHandlers.postMovie);
+app.post('/api/users', userHandlers.postUser)
