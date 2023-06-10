@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-const port = process.env.APP_PORT ?? 6008;
+const port = process.env.APP_PORT ?? 6010;
 
 const welcome = (req, res) => {
   console.log("page d'accueil")
