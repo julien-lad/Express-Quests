@@ -1,7 +1,7 @@
 const database = require("./database");
 
 const getUsers = (req, res) => {
-    let sqlUser = "SELECT * FROM users";
+    let sqlUser = "SELECT firstname, lastname, email, city, language FROM users";
     const sqlValuesUser = [];
 
     if (req.query.language != null) {
@@ -31,15 +31,14 @@ const getUserById = (req, res) => {
     const id = parseInt(req.params.id);
 
     database
-    .query("select * from users where id = ?", [id])
+    .query("SELECT firstname, lastname, email, city, language from users where id = ?", [id])
     .then(([users]) => {
         if (users[0] != null) {
             res.json(users [0]);
         } else {
             res.status(404).send("Not Found");
         }
-        res.json(id);
-        })
+    })
     .catch((err) => {
         console.error(err);
         res.status(500).send("Error retrieving data from database")
@@ -65,12 +64,12 @@ const postUser = (req, res) => {
 
 const updateUser = (req, res) => {
     const id = parseInt(req.params.id);
-    const { firstname, lastname, email, city, language } = req.body;
+    const { firstname, lastname, email, city, language, hashedPassword } = req.body;
     
     database
     .query(
-      "update users set firstname = ?, lastname = ?, email = ?, city = ?, language = ? where id = ?",
-      [firstname, lastname, email, city, language, id]
+      "update users set firstname = ?, lastname = ?, email = ?, city = ?, language = ?, hashedPassword = ? where id = ?",
+      [firstname, lastname, email, city, language, hashedPassword, id]
       )
     .then(([result]) => {
       if (result.affectedRows === 0) {

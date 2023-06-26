@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-const port = process.env.APP_PORT ?? 6008;
+const port = process.env.APP_PORT ?? 5050 ;
 
 app.listen(port, (err) => {
   if (err) {
